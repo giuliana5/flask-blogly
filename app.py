@@ -45,3 +45,11 @@ def create_user():
     db.session.commit()
 
     return redirect("/users")
+
+@app.route("/users/<int:user_id>")
+def user_details(user_id):
+    """View the user's details."""
+
+    user = User.query.get_or_404(user_id)
+
+    return render_template("details.html", user=user)
