@@ -1,0 +1,44 @@
+body {
+    margin: 2em;
+    color: white;
+    background-color: #9fa8a3;
+}
+
+hr {
+    width: 20%;
+}
+
+li {
+    padding: 12px;
+}
+
+a,
+button {
+    color: white;
+    padding: 5px;
+    font-size: 15px;
+    border: 2px solid white;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: #5adbb5;
+}
+
+a:hover,
+button:hover {
+    background-color: #5dbea3;
+}
+
+div,
+button {
+    margin: 15px;
+}
+
+label {
+    display: inline-block;
+    width: 5%;
+    text-align: left;
+}
+
+input {
+    display: inline-block;
+}
