@@ -1,0 +1,19 @@
+ {% extends 'base.html' %}
+ {% block title %}{{user.full_name}}{% endblock %}
+ {% block content %}
+ 
+ <section>
+
+    {% if user.image_url %}
+    <div>
+        <img src="{{user.image_url}}" width="200px"/>
+    </div>
+    {% endif %}
+
+    <div>
+        <h1 id="profile-name">{{user.full_name}}</h1>
+    </div>
+
+ </section>
+ 
+ {% endblock %}
