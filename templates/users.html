@@ -9,12 +9,12 @@
     <ul>
         {% for user in users %}
         <li>
-            {{user.full_name}}
+            <a href="/users/{{user.id}}">{{user.full_name}}</a>
         </li>
         {% endfor %}
     </ul>
 </div>
 
-<div><a href="/users/new">Add User</a></div>
+<div><a class="new-user" href="/users/new">Add User</a></div>
 
 {% endblock %}
