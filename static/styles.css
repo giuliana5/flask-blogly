@@ -12,18 +12,18 @@ li {
     padding: 12px;
 }
 
-a,
+.new-user,
 button {
     color: white;
+    text-decoration: none;
     padding: 5px;
     font-size: 15px;
     border: 2px solid white;
     border-radius: 5px;
-    text-decoration: none;
     background-color: #5adbb5;
 }
 
-a:hover,
+.new-user:hover,
 button:hover {
     background-color: #5dbea3;
 }
@@ -41,4 +41,40 @@ label {
 
 input {
     display: inline-block;
+}
+
+li a {
+    color: white;
+    text-decoration: none;
+}
+
+li a:hover {
+    text-decoration: underline;
+}
+
+.delete,
+.cancel {
+    background-color: #dd7973;
+}
+
+.delete:hover,
+.cancel:hover {
+    background-color: #a4504b;
+}
+
+section {
+    display: flex;
+    align-items: center;
+}
+
+#profile-name {
+    margin: 15px;
+}
+
+.cancel {
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    border: 2px solid white;
+    border-radius: 5px;
 }
