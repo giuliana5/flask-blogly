@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Create Post{% endblock %}
+{% block content %}
+
+<h1>Create Post</h1>
+<hr align="left">
+
+<form method="POST">
+    <div>
+        <label for="title">Title of Post</label>
+        <input type="text" id="title" name="title"/>
+    </div>
+    <div>
+        <label for="content">Content</label>
+        <input type="text" id="content" name="content"/>
+    </div>
+    <button>Create</button>
+</form>
+
+{% endblock %}
