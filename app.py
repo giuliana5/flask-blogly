@@ -1,6 +1,6 @@
 from flask import Flask, redirect, render_template, request
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User
+from models import db, connect_db, User, Post
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly'
@@ -51,8 +51,9 @@ def user_details(user_id):
     """View the user's details."""
 
     user = User.query.get_or_404(user_id)
+    posts = Post.query.filter_by(user_id = user_id)
 
-    return render_template("details.html", user=user)
+    return render_template("details.html", user=user, posts=posts)
 
 @app.route("/users/<int:user_id>/edit")
 def edit_user_form(user_id):
@@ -81,8 +82,34 @@ def delete_user(user_id):
     """Deletes user from db."""
 
     user = User.query.get_or_404(user_id)
-    
+    posts = Post.query.filter_by(user_id = user_id).all()
+
+    for post in posts:
+        db.session.delete(post)
     db.session.delete(user)
     db.session.commit()
 
     return redirect("/users")
+
+@app.route("/users/<int:user_id>/posts/new")
+def new_post_form(user_id):
+    """Show form to create a new post."""
+
+    user = User.query.get_or_404(user_id)
+
+    return render_template("new-post.html", user=user)
+
+@app.route("/users/<int:user_id>/posts/new", methods=["POST"])
+def create_post(user_id):
+    """Add a new post to db."""
+
+    post = Post(
+        title=request.form["title"],
+        content=request.form["content"],
+        user_id=user_id
+    )
+
+    db.session.add(post)
+    db.session.commit()
+
+    return redirect(f"/users/{user_id}")
