@@ -12,7 +12,7 @@ li {
     padding: 12px;
 }
 
-.new-user,
+.new,
 button {
     color: white;
     text-decoration: none;
@@ -23,7 +23,7 @@ button {
     background-color: #5adbb5;
 }
 
-.new-user:hover,
+.new:hover,
 button:hover {
     background-color: #5dbea3;
 }
@@ -64,6 +64,7 @@ li a:hover {
 
 section {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 }
 
@@ -77,4 +78,8 @@ section {
     padding: 5px;
     border: 2px solid white;
     border-radius: 5px;
+}
+
+.break {
+    flex-basis: 100%;
 }
