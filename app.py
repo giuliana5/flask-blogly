@@ -113,3 +113,11 @@ def create_post(user_id):
     db.session.commit()
 
     return redirect(f"/users/{user_id}")
+
+@app.route("/posts/<int:post_id>")
+def post_details(post_id):
+    """Display post."""
+
+    post = Post.query.get_or_404(post_id)
+
+    return render_template("post.html", post=post)
