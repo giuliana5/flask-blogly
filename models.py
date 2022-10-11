@@ -1,8 +1,10 @@
 """Models for Blogly."""
 
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 db = SQLAlchemy()
+dt = datetime.datetime.now()
 
 def connect_db(app):
     """Connect to the database."""
@@ -41,7 +43,7 @@ class Post(db.Model):
     post_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.Text, nullable=False)
     content = db.Column(db.Text, nullable=False)
-    created_at = db.Column(db.DateTime)
+    created_at = db.Column(db.DateTime, nullable=False, default=dt.replace(second=0, microsecond=0))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     # create relationship between models
