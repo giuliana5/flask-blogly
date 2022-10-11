@@ -15,6 +15,7 @@
         <input type="text" id="content" name="content"/>
     </div>
     <button>Create</button>
+    <button formaction="/users/{{user.id}}" formmethod="GET" class="cancel">Cancel</button>
 </form>
 
 {% endblock %}
