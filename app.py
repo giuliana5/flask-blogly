@@ -61,7 +61,7 @@ def edit_user_form(user_id):
 
     user = User.query.get_or_404(user_id)
 
-    return render_template("edit.html", user=user)
+    return render_template("edit-user.html", user=user)
 
 @app.route("/users/<int:user_id>/edit", methods=["POST"])
 def edit_user(user_id):
@@ -121,3 +121,24 @@ def post_details(post_id):
     post = Post.query.get_or_404(post_id)
 
     return render_template("post.html", post=post)
+
+@app.route("/posts/<int:post_id>/edit")
+def edit_post_form(post_id):
+    """Display form to edit post."""
+
+    post = Post.query.get_or_404(post_id)
+
+    return render_template("edit-post.html", post=post)
+
+@app.route("/posts/<int:post_id>/edit", methods=["POST"])
+def edit_post(post_id):
+    """Change the post to match new form content."""
+
+    post = Post.query.get_or_404(post_id)
+    post.title = request.form["title"]
+    post.content = request.form["content"]
+
+    db.session.add(post)
+    db.session.commit()
+
+    return redirect(f"/posts/{post_id}")
