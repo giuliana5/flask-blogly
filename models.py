@@ -46,9 +46,27 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=dt.replace(second=0, microsecond=0))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    # create relationship between models
+    # create relationship between models & through relationship
     user = db.relationship("User", backref="posts")
+    tags = db.relationship('Tag', secondary="post_tags", backref="posts")
 
     def __repr__(self):
         return f"<Post {self.title} {self.content} {self.created_at} {self.user_id}>"
+
     
+class Tag(db.model):
+    """Tag model to tag posts."""
+
+    __tablename__ = "tags"
+
+    tag_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False, unique=True)
+    
+
+class PostTag(db.model):
+    """Mapping of a post to a tag."""
+
+    __tablename__ = "post_tags"
+
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), primary_key=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.tag_id'), primary_key=True)
