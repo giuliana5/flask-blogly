@@ -162,3 +162,11 @@ def tag_list():
     tags = Tag.query.order_by(Tag.name).all()
 
     return render_template("tags.html", tags=tags)
+
+@app.route("/tags/<int:tag_id>")
+def tag_details(tag_id):
+    """Retreives tag details."""
+
+    tag = Tag.query.get_or_404(tag_id)
+
+    return render_template("tag-details.html", tag=tag)
