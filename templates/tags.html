@@ -8,7 +8,9 @@
 <div>
     <ul>
         {% for tag in tags %}
-        <li>{{tag.name}}</li>
+        <li>
+            <a href="/tags/{{tag.tag_id}}">{{tag.name}}</a>
+        </li>
         {% endfor %}
     </ul>
 </div>
