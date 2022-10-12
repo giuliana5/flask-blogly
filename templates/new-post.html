@@ -8,11 +8,19 @@
 <form method="POST">
     <div>
         <label for="title">Title of Post</label>
-        <input type="text" id="title" name="title"/>
+        <input type="text" id="title" name="title" required/>
     </div>
     <div>
         <label for="content">Content</label>
-        <input type="text" id="content" name="content"/>
+        <input type="text" id="content" name="content" required/>
+    </div>
+    <div class="container">
+        <h2><small>Tags</small></h2>
+        {% for tag in tags %}
+        <div>
+            <input type="checkbox" value={{tag.tag_id}} name="tags">{{tag.name}}
+        </div>
+        {% endfor %}
     </div>
     <button>Create</button>
     <button formaction="/users/{{user.id}}" formmethod="GET" class="cancel">Cancel</button>
