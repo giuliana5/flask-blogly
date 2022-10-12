@@ -96,20 +96,27 @@ def new_post_form(user_id):
     """Show form to create a new post."""
 
     user = User.query.get_or_404(user_id)
+    tags = Tag.query.order_by(Tag.name).all()
 
-    return render_template("new-post.html", user=user)
+    return render_template("new-post.html", user=user, tags=tags)
 
 @app.route("/users/<int:user_id>/posts/new", methods=["POST"])
 def create_post(user_id):
     """Add a new post to db."""
 
-    post = Post(
+    new_post = Post(
         title=request.form["title"],
         content=request.form["content"],
         user_id=user_id
     )
 
-    db.session.add(post)
+    tags = request.form.getlist("tags")
+
+    for tag in tags:
+        t = Tag.query.get(int(tag))
+        new_post.tags.append(t)
+
+    db.session.add(new_post)
     db.session.commit()
 
     return redirect(f"/users/{user_id}")
@@ -127,8 +134,9 @@ def edit_post_form(post_id):
     """Display form to edit post."""
 
     post = Post.query.get_or_404(post_id)
+    tags = Tag.query.order_by(Tag.name).all()
 
-    return render_template("edit-post.html", post=post)
+    return render_template("edit-post.html", post=post, tags=tags)
 
 @app.route("/posts/<int:post_id>/edit", methods=["POST"])
 def edit_post(post_id):
@@ -137,6 +145,9 @@ def edit_post(post_id):
     post = Post.query.get_or_404(post_id)
     post.title = request.form["title"]
     post.content = request.form["content"]
+
+    tag_ids = [int(id) for id in request.form.getlist("tags")]
+    post.tags = Tag.query.filter(Tag.tag_id.in_(tag_ids)).all()
 
     db.session.add(post)
     db.session.commit()
@@ -168,8 +179,9 @@ def tag_details(tag_id):
     """Retreives tag details."""
 
     tag = Tag.query.get_or_404(tag_id)
+    posts = tag.posts
 
-    return render_template("tag-details.html", tag=tag)
+    return render_template("tag-details.html", tag=tag, posts=posts)
 
 @app.route("/tags/new")
 def new_tag_form():
