@@ -1,6 +1,6 @@
 from flask import Flask, redirect, render_template, request
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User, Post
+from models import db, connect_db, User, Post, Tag
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly'
@@ -21,7 +21,7 @@ def home():
 def users():
     """Display list of users."""
 
-    users = User.query.order_by(User.last_name, User.first_name).all()
+    users = User.query.order_by(User.first_name, User.last_name).all()
 
     return render_template("users.html", users=users)
 
@@ -155,4 +155,10 @@ def delete_post(post_id):
 
     return redirect(f"/users/{user_id}")
 
+@app.route("/tags")
+def tag_list():
+    """Displays the list of tags."""
 
+    tags = Tag.query.order_by(Tag.name).all()
+
+    return render_template("tags.html", tags=tags)
