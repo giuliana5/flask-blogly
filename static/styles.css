@@ -87,3 +87,15 @@ section {
 input {
     background-color: rgba(255, 255, 255, .7);
 }
+
+.container {
+    padding: 5px;
+}
+
+span {
+    font-size: 12px;
+    border-radius: 5px;
+    background-color: #55c2da;
+    padding: 5px;
+
+}
