@@ -170,3 +170,22 @@ def tag_details(tag_id):
     tag = Tag.query.get_or_404(tag_id)
 
     return render_template("tag-details.html", tag=tag)
+
+@app.route("/tags/new")
+def new_tag_form():
+    """Shows the form to create a new tag."""
+
+    return render_template("new-tag.html")
+
+@app.route("/tags/new", methods=["POST"])
+def new_tag():
+    """Create new tag."""
+
+    tag = Tag(
+        name=request.form["name"]
+    )
+
+    db.session.add(tag)
+    db.session.commit()
+
+    return redirect("/tags")
