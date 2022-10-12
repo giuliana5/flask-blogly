@@ -8,6 +8,11 @@
 
 <p><i>By {{post.user.full_name}}</i></p>
 <p><i>Created at: {{post.created_at}}</i></p>
+<p>Tags:
+    {% for tag in post.tags %}
+    <span>{{tag.name}}</span>
+    {% endfor %}
+</p>
 
 <form>
     <button formaction="/posts/{{post.post_id}}/edit" formmethod="GET">Edit</button>
