@@ -54,7 +54,7 @@ class Post(db.Model):
         return f"<Post {self.title} {self.content} {self.created_at} {self.user_id}>"
 
     
-class Tag(db.model):
+class Tag(db.Model):
     """Tag model to tag posts."""
 
     __tablename__ = "tags"
@@ -63,7 +63,7 @@ class Tag(db.model):
     name = db.Column(db.Text, nullable=False, unique=True)
     
 
-class PostTag(db.model):
+class PostTag(db.Model):
     """Mapping of a post to a tag."""
 
     __tablename__ = "post_tags"
